@@ -1,0 +1,191 @@
+<!doctype html>
+<style>
+    body {
+ background-color:black;
+ background-size:cover;
+ margin:0;
+ 
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+.img {
+    width:fit-content;
+  height:fit-content;
+  object-fit: cover;
+}
+.topnav {
+  background-color:grey;
+  overflow: hidden;
+
+  
+}
+table, th, td {
+  border: 1px solid black;
+  
+  padding: 10px;
+  
+}
+table {
+  border-collapse: collapse;
+  width:75%;
+
+}
+td,th{
+  color: black;
+  width:25%;
+}
+th{
+  background-color:gold;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+tr{
+  background-color:white;
+}
+.form-popup {
+  display: none;
+  position:fixed;
+  bottom: 70px;
+  right: 50px;
+  border: 3px solid peru;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 100%;
+  padding: 10px;
+  background-color:peru;
+}
+
+
+label{
+  color:rgb(12, 12, 12);
+  font-size: large;
+  font-weight: 600;
+}
+
+.btn{
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+.btn:hover{
+  opacity: 1;
+}
+.form-container .cancel {
+  background-color: red;
+}
+ 
+
+</style>
+<body>
+    
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="home">HOME</a>
+            <a href="addevent">Add event</a>
+            <a href="enrol_events">Enrolled events</a>
+            <a href="#">Contact</a>
+        </div>
+    
+    
+        <div class="topnav">
+        <span style="font-size:30px;cursor:pointer;color:black;" onclick="openNav()">&#9776; FAT</span>
+        </div>
+      <div id="main">
+        <br><br>
+        <center>
+          <table>
+          <tr>
+            <th>Games</th>
+            <th>Description</th> 
+            <th>Info</th>
+          </tr>
+
+          <% for(var j=0;j<results.length;j++){ %>
+            <tr>
+              <td><center><img src="<%=results[j].pic%>" border="0" style="width:50%"></center></td>
+              <td><%=results[j].description%><%=results[j].place%><%=results[j].date%></td>
+              <form action="/myevents/<%=results[j].eve_id%>/delete" method="POST">
+                <input type="hidden" name="sport_id" value="<%=results[j].sport_id%>">
+                <input type="hidden" name="event_id" value="<%=results[j].eve_id%>">
+                <td><button type="submit" class="btn btn-dark"  onclick="alertFunction()">Delete</button></td>
+              </form>
+            </tr>
+          <%}%>
+
+          
+          </table>
+        </center>        
+      </div>
+    
+    <script>
+        function openNav() {
+          document.getElementById("mySidenav").style.width = "250px";
+          document.getElementById("main").style.marginLeft = "250px";
+          document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+        }
+        
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+          document.getElementById("main").style.marginLeft= "0";
+          document.body.style.backgroundColor = "black";
+        }
+        function alertFunction() {
+        var txt;
+        confirm("Event Deleted Successfully!!")
+        }
+    </script>
+         
+    
+</body>
+</html>
